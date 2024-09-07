@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const Post = () => {
   const [category, setCategory] = useState("selectCategory");
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState<number | null>(null);
   const [title, setTitle] = useState("");
   const [job, setJob] = useState([
     {
@@ -25,10 +25,10 @@ const Post = () => {
   };
 
   const addJob = () => {
-    if (category === "selectCategory" || title === "" || salary === 0) {
+    if (category === "selectCategory" || title === "" || salary === null) {
       alert("未入力の項目があります");
       return;
-    } else if (salary % 50 !== 0) {
+    } else if (salary ? salary % 50 !== 0 : false) {
       alert("年収は50万円単位で入力してください");
       return;
     }
@@ -75,11 +75,9 @@ const Post = () => {
         <div className="mt-3">
           <div className="text-lg">年収(万円)</div>
           <input
-            type="number"
-            step="50"
-            min="0"
+            type="text"
             className="border-gray-400 border-[1px] border-solid  w-[300px] h-[40px] px-2"
-            value={salary}
+            value={salary ? salary : 0}
             onChange={salaryChange}
           />
         </div>
