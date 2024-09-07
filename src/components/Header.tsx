@@ -9,7 +9,7 @@ const Header = () => {
         <Link to="/" className="ml-[30px] text-white text-base">
           求人検索
         </Link>
-        <Link to="/Post" className="ml-[30px] text-white text-base">
+        <Link to="/post" className="ml-[30px] text-white text-base">
           求人投稿
         </Link>
       </div>
