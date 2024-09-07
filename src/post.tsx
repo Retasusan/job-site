@@ -14,11 +14,19 @@ const Post = () => {
     },
   ]);
 
+  const toHalfWidth = (str: string) => {
+    str = str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+    });
+    return str;
+  };
+
   const categoryChage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
   };
   const salaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSalary(parseInt(e.target.value));
+    const halfWidth = toHalfWidth(e.target.value);
+    setSalary(parseInt(halfWidth));
   };
   const titleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
