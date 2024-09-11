@@ -42,7 +42,10 @@ const Post = () => {
     };
 
     try {
-      await axios.post("http://localhost:3005/api/v1/posts", newJob);
+      await axios.post(
+        "https://git.heroku.com/obscure-forest-13675.git/api/v1/posts",
+        newJob
+      );
       console.log(newJob);
       alert("投稿に成功しました");
       setCategory("selectCategory");
