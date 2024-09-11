@@ -46,7 +46,6 @@ const Post = () => {
         "https://git.heroku.com/obscure-forest-13675.git/api/v1/posts",
         newJob
       );
-      console.log(newJob);
       alert("投稿に成功しました");
       setCategory("selectCategory");
       setSalary(0);
