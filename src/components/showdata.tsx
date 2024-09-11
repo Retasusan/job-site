@@ -10,9 +10,12 @@ export default function ShowData({ selectedCategories, salary }: Props) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("https://git.heroku.com/obscure-forest-13675.git/api/v1/posts", {
-      method: "GET",
-    })
+    fetch(
+      "https://obscure-forest-13675-7dc690c010ac.herokuapp.com/api/v1/posts",
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((json) => {
         setPosts(json);

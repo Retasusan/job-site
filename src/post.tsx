@@ -43,7 +43,7 @@ const Post = () => {
 
     try {
       await axios.post(
-        "https://git.heroku.com/obscure-forest-13675.git/api/v1/posts",
+        "https://obscure-forest-13675-7dc690c010ac.herokuapp.com/api/v1/posts",
         newJob
       );
       alert("投稿に成功しました");
