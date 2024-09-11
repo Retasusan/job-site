@@ -17,30 +17,7 @@ export default function Home() {
 
   const handleSalaly = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSalary(Number(event.target.value));
-    // setFilteredData(filteredData.filter((item) => item.earnings >= salaly));
   };
-
-  // useEffect(() => {
-  //   setSalalyData(posts.filter((item: Post) => item.salaly >= salaly));
-  // }, [salaly, posts]);
-
-  // type Item = {
-  //   id: number;
-  //   title: string;
-  //   category: string;
-  //   earnings: number;
-  // };
-
-  // const getCommonElements = (
-  //   filteredData: Item[],
-  //   salalyData: Item[]
-  // ): Item[] => {
-  //   return filteredData.filter((item1) =>
-  //     salalyData.some((item2) => item1.id === item2.id)
-  //   );
-  // };
-
-  // const commonElements = getCommonElements(filteredData, salalyData);
 
   return (
     <div>
