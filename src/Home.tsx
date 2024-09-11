@@ -23,7 +23,7 @@ export default function Home() {
     <div>
       <Header />
       <div className="flex">
-        <div className="w-[300px] bg-gray-200 max-h-screen">
+        <div className="w-[300px] bg-gray-200 max-h-screen overflow-y-auto">
           <div className="text-[20px] pl-4 pt-3">求人カテゴリ</div>
           <div className="pl-4 mt-2">
             <label>
