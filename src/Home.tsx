@@ -1,23 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import Header from "./components/Header";
-import Data from "./components/data.json";
+import ShowData from "components/showdata";
 
-const Home = () => {
+export default function Home() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [filteredData, setFilteredData] = useState(Data);
-  const [salalyData, setSalalyData] = useState(Data);
-  const [salaly, setSalaly] = useState<number>(300);
-
-  useEffect(() => {
-    setFilteredData(
-      Data.filter((item) =>
-        selectedCategories.length > 0
-          ? selectedCategories.includes(item.category)
-          : true
-      )
-    );
-  }, [selectedCategories, salaly]);
+  const [salary, setSalary] = useState<number>(300);
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = event.target;
@@ -28,31 +16,31 @@ const Home = () => {
   };
 
   const handleSalaly = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSalaly(Number(event.target.value));
+    setSalary(Number(event.target.value));
     // setFilteredData(filteredData.filter((item) => item.earnings >= salaly));
   };
 
-  useEffect(() => {
-    setSalalyData(Data.filter((item) => item.earnings >= salaly));
-  }, [salaly]);
+  // useEffect(() => {
+  //   setSalalyData(posts.filter((item: Post) => item.salaly >= salaly));
+  // }, [salaly, posts]);
 
-  type Item = {
-    id: number;
-    title: string;
-    category: string;
-    earnings: number;
-  };
+  // type Item = {
+  //   id: number;
+  //   title: string;
+  //   category: string;
+  //   earnings: number;
+  // };
 
-  const getCommonElements = (
-    filteredData: Item[],
-    salalyData: Item[]
-  ): Item[] => {
-    return filteredData.filter((item1) =>
-      salalyData.some((item2) => item1.id === item2.id)
-    );
-  };
+  // const getCommonElements = (
+  //   filteredData: Item[],
+  //   salalyData: Item[]
+  // ): Item[] => {
+  //   return filteredData.filter((item1) =>
+  //     salalyData.some((item2) => item1.id === item2.id)
+  //   );
+  // };
 
-  const commonElements = getCommonElements(filteredData, salalyData);
+  // const commonElements = getCommonElements(filteredData, salalyData);
 
   return (
     <div>
@@ -64,7 +52,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="事務"
+                value="officeWork"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -74,7 +62,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="エンジニア"
+                value="engineer"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -84,7 +72,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="営業"
+                value="sales"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -94,7 +82,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="デザイン"
+                value="disign"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -104,7 +92,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="マーケティング"
+                value="marketing"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -114,7 +102,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="財務・経理"
+                value="finance"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -124,7 +112,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="人事"
+                value="humanResources"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -134,7 +122,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="カスタマーサポート"
+                value="customerSupport"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -144,7 +132,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="製造"
+                value="manufacture"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -154,7 +142,7 @@ const Home = () => {
             <label>
               <input
                 type="checkbox"
-                value="医療・介護"
+                value="medical"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -176,28 +164,8 @@ const Home = () => {
             </select>
           </div>
         </div>
-        <div className="w-[90%] bg-white h-screen">
-          <div className="font-bold text-lg ml-3 mt-2">求人一覧</div>
-          <div className="text-base ml-3">
-            該当件数
-            {commonElements.length}件
-          </div>
-          <ul>
-            {commonElements.map((item) => (
-              <li
-                key={item.id}
-                className="border-2 border-solid border-gray-300 pl-4 pt-2 m-3 rounded-lg pb-10 max-w-[700px]"
-              >
-                <div className="font-bold">{item.title}</div>
-                <div className="mt-1">カテゴリ：{item.category}</div>
-                <div className="mt-1">年収：{item.earnings}万円</div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ShowData selectedCategories={selectedCategories} salary={salary} />
       </div>
     </div>
   );
-};
-
-export default Home;
+}

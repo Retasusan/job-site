@@ -1,18 +1,12 @@
 import React from "react";
 import Header from "./components/Header";
 import { useState } from "react";
+import axios from "axios";
 
 const Post = () => {
   const [category, setCategory] = useState("selectCategory");
   const [salary, setSalary] = useState<number | null>(null);
   const [title, setTitle] = useState("");
-  const [job, setJob] = useState([
-    {
-      category: "",
-      salary: 0,
-      title: "",
-    },
-  ]);
 
   const toHalfWidth = (str: string) => {
     str = str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
@@ -26,13 +20,13 @@ const Post = () => {
   };
   const salaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const halfWidth = toHalfWidth(e.target.value);
-    setSalary(parseInt(halfWidth));
+    setSalary(Number(halfWidth));
   };
   const titleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const addJob = () => {
+  const addJob = async () => {
     if (category === "selectCategory" || title === "" || salary === null) {
       alert("未入力の項目があります");
       return;
@@ -42,16 +36,21 @@ const Post = () => {
     }
 
     const newJob = {
+      title: title,
       category: category,
       salary: salary,
-      title: title,
     };
 
-    setJob([...job, newJob]);
-    setCategory("selectCategory");
-    setSalary(0);
-    setTitle("");
-    alert("求人が投稿されました");
+    try {
+      await axios.post("http://localhost:3005/api/v1/posts", newJob);
+      console.log(newJob);
+      alert("投稿に成功しました");
+      setCategory("selectCategory");
+      setSalary(0);
+      setTitle("");
+    } catch (err) {
+      alert("投稿に失敗しました");
+    }
   };
 
   return (
